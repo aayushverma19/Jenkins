@@ -19,12 +19,7 @@ pipeline {
         }
         stage ('unit test'){
             steps{
-                script {
-                    def exitCode = sh(script: 'mvn test', returnStatus: true)
-                    if (exitCode != 0) {
-                        echo "Tests failed."
-                    }
-                }
+               sh 'mvn test'
             }
         }
     }
@@ -32,6 +27,12 @@ pipeline {
         always {
             junit stdioRetention: 'ALL', testResults: '**/target/**/*.xml'
         }
+        success {
+          slackSend(channel: 'test-case', color: 'good', message: "Successful: Test case passed and report published. Job Details - Name: ${JOB_NAME}, Build Number: ${BUILD_NUMBER}, URL: ${BUILD_URL}")
+        }
+        failure {
+          slackSend(channel: 'test-case', color: 'danger', message: "FAILURE:  Test case Failed. Check log and console output. Job Details - Name: ${JOB_NAME}, Build Number: ${BUILD_NUMBER}, URL: ${BUILD_URL}")
+      }
     }
   }
 }
