@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+    
+    environment {
+        PATH = "$HOME/.local/bin:$PATH"
+    }
+    
+    stages {
+        stage('Setup Environment') {
+            steps {
+                script {
+                    sh 'sudo apt update'
+                    sh 'sudo apt install -y python3-pip python3-pytest'
+                    sh 'pip install --break-system-packages coverage'
+                }
+            }
+        }
+        
+        stage('Clone Repository') {
+            steps {
+                git url: 'https://github.com/snaatak-Zero-Downtime-Crew/attendance-api.git' , credentialsId: 'git-cred' , branch: 'main'
+            }
+        }
+
+        stage('Run Tests with Coverage') {
+            steps {
+                sh 'python3 -m coverage run -m pytest || python3 -m coverage report -m'
+                sh 'coverage html'
+            }
+        }
+        
+        stage('public report'){
+            steps{
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, icon: '', keepAll: false, reportDir: 'htmlcov', 
+                reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+            }
+        }
+    }
+}
