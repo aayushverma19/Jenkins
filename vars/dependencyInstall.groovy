@@ -1,13 +1,13 @@
 
-def call(String depCheckVersion) {
+def call(String depCheckVersion, String depdir ) {
     sh """
-        DEP_CHECK_DIR="${WORKSPACE}/dependency-check"
+        DEP_CHECK_DIR="${depdir}"
 
         if [ ! -d "$DEP_CHECK_DIR" ]; then
             curl -sLO https://github.com/jeremylong/DependencyCheck/releases/download/v${depCheckVersion}/dependency-check-${depCheckVersion}-release.zip
             unzip dependency-check-${depCheckVersion}-release.zip
         fi
 
-        ${WORKSPACE}/dependency-check/bin/dependency-check.sh --version
+        ${depdir}/bin/dependency-check.sh --version
     """
 }
