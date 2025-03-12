@@ -96,7 +96,7 @@ def call(String branch, String repoUrl, String gitPassword ) {
                   Jenkins CI
                   Zero Downtime Crew
                   """,
-                          subject: "Jenkins Pipeline FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                        subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}",
                           to: 'aayush.verma@mygurukulam.co'
               )
               
