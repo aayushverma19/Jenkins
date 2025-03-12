@@ -51,7 +51,7 @@ def call(String branch, String repoUrl ) {
       }
       post {
           always{    
-              publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, icon: '', keepAll: false, reportDir: 'security-reports', 
+              publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, icon: '', keepAll: false, reportDir: 'dependency-reports', 
               reportFiles: 'dependency-check-report.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
           }
           success {
