@@ -1,4 +1,4 @@
-def call(String branch, String repoUrl) {
+def call(String branch, String repoUrl, String gitPassword ) {
 
 pipeline {
   agent any
@@ -6,7 +6,7 @@ pipeline {
         stage('clean workspace'){
             steps{
               script{
-                deleteDir()
+                cleanWs()
               }
             }
         }
@@ -14,7 +14,7 @@ pipeline {
             steps{
                 checkout([$class: 'GitSCM',
                               branches: [[name: "*/${branch}"]],
-                              userRemoteConfigs: [[url: repoUrl]]])
+                              userRemoteConfigs: [[url: repoUrl , credentialsId: gitPassword ]]])
             }
         }
         stage ('unit test'){
