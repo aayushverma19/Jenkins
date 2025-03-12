@@ -4,6 +4,9 @@ node {
     }
     
     try {
+        stage('Clean Workspace') {
+            cleanWs() // Ensures a fresh workspace, removing hidden files
+        }
         stage('Setup Environment') {
             sh 'sudo apt update'
             sh 'sudo apt install -y python3-pip python3-pytest'
