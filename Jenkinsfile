@@ -11,7 +11,7 @@ pipeline {
         }
         stage('test'){
             steps{
-                sh 'zap.sh -cmd -quickurl http://52.20.45.55:8080/actuator/health -port 8090 -quickprogress -quickout /var/lib/jenkins/report.html'
+                sh 'zap.sh -cmd -quickurl http://52.20.45.55:8080/actuator/health -quickprogress -quickout /var/lib/jenkins/report.html'
             }
         }
         stage('public report'){
