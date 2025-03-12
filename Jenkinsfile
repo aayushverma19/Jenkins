@@ -26,13 +26,13 @@ node {
         }
         
         stage('Notify Success') {
-            slackSend(channel: 'test-case', color: 'good', 
-                      message: "Successful: Test case passed and report published. Job Details - Name: ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, URL: ${env.BUILD_URL}")
+            slackSend(channel: 'notification', color: 'good', 
+                      message: "Successful: Check Code Coverage report. Job Details - Name: ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, URL: ${env.BUILD_URL}")
         }
     } catch (Exception e) {
         stage('Notify Failure') {
-            slackSend(channel: 'test-case', color: 'danger', 
-                      message: "FAILURE: Test case Failed. Check log and console output. Job Details - Name: ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, URL: ${env.BUILD_URL}")
+            slackSend(channel: 'notification', color: 'danger', 
+                      message: "FAILURE:  Check log and console output. Job Details - Name: ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, URL: ${env.BUILD_URL}")
         }
         throw e
     }
