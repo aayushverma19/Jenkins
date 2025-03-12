@@ -5,7 +5,7 @@ node {
     
     try {
         stage('Clean Workspace') {
-            cleanWs() // Ensures a fresh workspace, removing hidden files
+            cleanWs() 
         }
         stage('Setup Environment') {
             sh 'sudo apt update'
