@@ -6,6 +6,7 @@ def call(String jobName, String buildNumber, String buildUrl, String toEmail) {
     )
 
     emailext(
+        attachmentsPattern: '**/target/**/*.xml',
         body: """
             Hello,
             
