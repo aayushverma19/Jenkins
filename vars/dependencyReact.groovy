@@ -1,4 +1,4 @@
-def call(String branch, String repoUrl, String gitPassword ) {
+def call(String branch, String repoUrl ) {
     pipeline {
       agent any
     
@@ -19,7 +19,7 @@ def call(String branch, String repoUrl, String gitPassword ) {
               steps{
                 checkout([$class: 'GitSCM',
                               branches: [[name: "*/${branch}"]],
-                              userRemoteConfigs: [[url: repoUrl , credentialsId: gitPassword ]]])
+                              userRemoteConfigs: [[url: repoUrl ]]])
             }
           }
           stage('Setup Dependency-Check') {
