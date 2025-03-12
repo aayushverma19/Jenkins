@@ -1,12 +1,13 @@
-def call () {
-  sh '''
 
-      if [ ! -d "$DEP_CHECK_DIR" ]; then
-          curl -sLO https://github.com/jeremylong/DependencyCheck/releases/download/v$DEP_CHECK_VERSION/dependency-check-$DEP_CHECK_VERSION-release.zip
-          unzip dependency-check-$DEP_CHECK_VERSION-release.zip
-      fi
-      
-      # Verify installation
-      $DEP_CHECK_DIR/bin/dependency-check.sh --version
-      '''
+def call(String depCheckVersion) {
+    sh """
+        DEP_CHECK_DIR="${WORKSPACE}/dependency-check"
+
+        if [ ! -d "$DEP_CHECK_DIR" ]; then
+            curl -sLO https://github.com/jeremylong/DependencyCheck/releases/download/v${depCheckVersion}/dependency-check-${depCheckVersion}-release.zip
+            unzip dependency-check-${depCheckVersion}-release.zip
+        fi
+
+        ${WORKSPACE}/dependency-check/bin/dependency-check.sh --version
+    """
 }
