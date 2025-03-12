@@ -3,6 +3,13 @@
 pipeline {
   agent any 
     stages{
+      stage('clean-workspace') {
+        steps{
+          script {
+              cleanWorkspace()  
+          }
+        }
+      }
       stage('clone repo') {
         steps{
           script {
@@ -53,7 +60,7 @@ pipeline {
                       to: 'aayush.verma@mygurukulam.co'
                       )
           }
-          failure {
+        failure {
             slackSend(channel: 'notification', color: 'danger', message: "FAILURE: Dependency Check Failed. Check log and console output. Job Details - Name: ${JOB_NAME}, Build Number: ${BUILD_NUMBER}, URL: ${BUILD_URL}")
                         emailext(
                   attachmentsPattern: 'dependency-reports/dependency-check-report.html',
