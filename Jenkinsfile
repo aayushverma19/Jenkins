@@ -13,7 +13,7 @@ pipeline {
       stage('dependency install') {
         steps{
           script {
-              dependencyInstall('8.4.0')  
+              dependencyInstall('8.4.0', '${WORKSPACE}/dependency-check')  
           }
         }
       }
