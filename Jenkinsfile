@@ -3,21 +3,21 @@
 pipeline {
   agent any 
     stages{
-      stage( clone repo) {
+      stage('clone repo') {
         steps{
           script {
               gitClone('main' , 'https://github.com/snaatak-Zero-Downtime-Crew/employee-api.git' , 'git-cred')  
           }
         }
       }
-      stage( clone repo) {
+      stage('dependency install') {
         steps{
           script {
               dependencyInstall('8.4.0')  
           }
         }
       }
-      stage( clone repo) {
+      stage('check dependency') {
         steps{
           script {
               GolangDependencyCheck()  
