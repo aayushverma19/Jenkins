@@ -6,7 +6,7 @@ def call(String jobName, String buildNumber, String buildUrl, String toEmail) {
         message: "Successful: Dependency Check passed and report published. Job Details - Name: ${jobName}, Build Number: ${buildNumber}, URL: ${buildUrl}"
     )
     emailext(
-        attachmentsPattern: 'dependency-reports/dependency-check-report.html',
+        attachmentsPattern: 'dependency_report.txt',
         body: """
             Hello,
             
