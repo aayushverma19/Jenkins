@@ -1,7 +1,11 @@
 @Library ('React-CI@SCRUM-217') _
 
 pipeline {
-  agent any 
+      agent any 
+    tools {
+        nodejs 'nodejs'  
+    }
+
     stages{
       stage('clean-workspace') {
         steps{
@@ -17,25 +21,18 @@ pipeline {
           }
         }
       }
-      stage('dependency install') {
-        steps{
-          script {
-              dependencyInstall('8.4.0', '${WORKSPACE}/dependency-check')  
-          }
-        }
-      }
       stage('check dependency') {
         steps{
           script {
-              reactDependencyCheck()  
+              reactDependency('dependency_report.txt')  
           }
         }
       }
   }
   post {
           always{    
-              publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, icon: '', keepAll: false, reportDir: 'dependency-reports', 
-              reportFiles: 'dependency-check-report.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+              publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, icon: '', keepAll: false, reportDir: '', 
+              reportFiles: 'dependency_report.txt', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
           }
           success {
             postBuildSuccess(JOB_NAME, BUILD_NUMBER, BUILD_URL, 'aayush.verma@mygurukulam.co')
