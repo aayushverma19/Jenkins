@@ -63,7 +63,7 @@ pipeline {
             )
         }
         failure {
-            slackSend(channel: 'notification', color: 'danger',username: 'Aayush Verma', message: "FAILURE: DAST check Failed. Check log and console output. Job Details - Name: ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, URL: ${env.BUILD_URL}")
+            slackSend(channel: 'notification', color: 'danger', username: 'Aayush Verma', message: "FAILURE: DAST check Failed. Check log and console output. Job Details - Name: ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, URL: ${env.BUILD_URL}")
 
             emailext(
                 body: """
