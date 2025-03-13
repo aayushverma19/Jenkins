@@ -39,7 +39,7 @@ pipeline {
     }
     post {
         success {
-            slackSend(channel: 'notification', color: 'good', username: 'Aayush Verma',  message: "Deployment Successful: DAST check passed and report published. Job Details - Name: ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, URL: ${env.BUILD_URL}")
+            slackSend(channel: 'notification', color: 'good', username: 'Jenkins CI',  message: "Deployment Successful: DAST check passed and report published. Job Details - Name: ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, URL: ${env.BUILD_URL}")
             emailext(
                 attachmentsPattern: ZAP_report,
                 body: """
@@ -55,7 +55,7 @@ pipeline {
                     You can find the ZAP report attached.
     
                     Best regards,  
-                    Aayush Verma
+                    Jenkins CI
                     Zero Downtime Crew
                 """,
                 subject: "Jenkins Build SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
@@ -63,7 +63,7 @@ pipeline {
             )
         }
         failure {
-            slackSend(channel: 'notification', color: 'danger', username: 'Aayush Verma', message: "FAILURE: DAST check Failed. Check log and console output. Job Details - Name: ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, URL: ${env.BUILD_URL}")
+            slackSend(channel: 'notification', color: 'danger', username: 'Jenkins CI', message: "FAILURE: DAST check Failed. Check log and console output. Job Details - Name: ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, URL: ${env.BUILD_URL}")
 
             emailext(
                 body: """
@@ -79,7 +79,7 @@ pipeline {
                     Please review logs for more details.
     
                     Regards,  
-                    Aayush Verma
+                    Jenkins CI
                     Zero Downtime Crew
                 """,
                 subject: "Jenkins Pipeline FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
