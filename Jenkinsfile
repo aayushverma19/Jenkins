@@ -13,7 +13,7 @@ pipeline {
       stage('clone repo') {
         steps{
           script {
-              gitClone('main' , 'https://github.com/OT-MICROSERVICES/frontend.git')  
+              gitClone('main' , 'https://github.com/snaatak-Zero-Downtime-Crew/frontend.git' , 'git-cred')
           }
         }
       }
