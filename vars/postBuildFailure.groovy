@@ -6,7 +6,7 @@ def call(String jobName, String buildNumber, String buildUrl, String toEmail) {
     )
 
     emailext(
-        attachmentsPattern: 'dependency-reports/dependency-check-report.html',
+        attachmentsPattern: 'dependency_report.txt',
         body: """
             Hello,
             
