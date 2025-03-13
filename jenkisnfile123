@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+   tools {
+        nodejs 'nodejs'  
+    }
+
+    environment {
+        REPORT_FILE = "dependency_report.txt" 
+    }
+
+    stages {
+            stage('Clean Workspace') {
+            steps {
+                cleanWs()
+            }
+        }
+
+        stage('Clone Repository') {
+            steps {
+                    git branch: 'main', credentialsId: 'git-cred', url: 'https://github.com/snaatak-Zero-Downtime-Crew/frontend.git'
+            }
+        }
+
+        stage('Dependency check') {
+            steps {
+               
+                sh """
+                npm audit --output-html>${REPORT_FILE}  || true
+                """
+            }
+        }
+    }
+}
