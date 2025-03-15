@@ -23,14 +23,14 @@ pipeline {
         }
         stage('run'){
             steps{
-                runBuganalyis()
+                runStaticCode()
             }
         }
     }
     post {
         always{
             publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, 
-            reportDir: 'reports', reportFiles: 'Bug-report.json', reportName: 'Bug Report'])
+            reportDir: 'reports', reportFiles: 'Static_code-report.json', reportName: 'Bug Report'])
           }
           success {
             postBuildSuccess(JOB_NAME, BUILD_NUMBER, BUILD_URL, 'aayush.verma@mygurukulam.co')
