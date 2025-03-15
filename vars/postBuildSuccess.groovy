@@ -2,7 +2,7 @@ def call(String jobName, String buildNumber, String buildUrl, String toEmail) {
     slackSend(
         channel: 'notification', 
         color: 'good', 
-        message: "Successful: Bug and report published on SonarQube Server. Job Details - Name: ${jobName}, Build Number: ${buildNumber}, URL: ${buildUrl}"
+        message: "Successful: Bug report published on SonarQube Server. Job Details - Name: ${jobName}, Build Number: ${buildNumber}, URL: ${buildUrl}"
     )
     emailext(
         attachmentsPattern: 'reports/Bug-report.json',
