@@ -1,4 +1,4 @@
-@Library ('JAVA-CI@scrum123') _
+@Library ('JAVA-CIcd@scrum123') _
 
 pipeline {
   agent any 
