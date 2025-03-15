@@ -5,7 +5,8 @@ def call(String jobName, String buildNumber, String buildUrl, String toEmail) {
         message: "Successful: Test case passed and report published. Job Details - Name: ${jobName}, Build Number: ${buildNumber}, URL: ${buildUrl}"
     )
     emailext(
-        attachmentsPattern: '**/target/**/*.xml',
+        attachmentsPattern: 'target/site/jacoco/**',
+        //attachmentsPattern: '**/target/**/*.xml',
         body: """
             Hello,
             
