@@ -5,7 +5,7 @@ def call(String jobName, String buildNumber, String buildUrl, String toEmail) {
         message: "Successful: Static code report published on SonarQube Server. Job Details - Name: ${jobName}, Build Number: ${buildNumber}, URL: ${buildUrl}"
     )
     emailext(
-        attachmentsPattern: 'dependency_report.txt',
+        attachmentsPattern: 'reports/Static_code-report.json',
         body: """
             Hello,
             
