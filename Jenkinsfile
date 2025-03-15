@@ -54,8 +54,8 @@ node {
                     - **Job Name:** ${env.JOB_NAME}
                     - **Build Number:** ${env.BUILD_NUMBER}
                     - **Build URL:** ${env.BUILD_URL}
-                
-                    Bug report published on SonarQube Server
+
+                    React Bug report published on SonarQube Server project name:- ${env.projectKey_name}
                 
                     Best regards,  
                     Jenkins CI
@@ -71,7 +71,7 @@ node {
                 channel: "${channel_name}", 
                 color: 'danger', 
                 username: 'Jenkins CI',
-                message: "FAILURE: Bug Check Failed.. Job Details - Name: ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, URL: ${env.BUILD_URL}"
+                message: "FAILURE: Bug Check Failed. Job Details - Name: ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, URL: ${env.BUILD_URL}"
             )
             emailext(
                 body: """
