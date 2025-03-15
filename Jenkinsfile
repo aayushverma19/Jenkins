@@ -87,5 +87,3 @@ pipeline {
     }
 }
 
-//sqa_198f7222eca06d47db66195bdfc057f909730042
-//    -Dsonar.token=sqa_198f7222eca06d47db66195bdfc057f909730042
