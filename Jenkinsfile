@@ -50,7 +50,7 @@ pipeline {
                     - **Build Number:** ${env.BUILD_NUMBER}
                     - **Build URL:** ${env.BUILD_URL}
     
-                    Bug report published on SonarQube Server
+                   Java Bug report published on SonarQube Server project name:- ${env.projectKey_name}
     
                     Best regards,  
                     Jenkins CI
