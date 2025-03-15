@@ -1,7 +1,7 @@
 node {
     def git_url = 'https://github.com/snaatak-Zero-Downtime-Crew/frontend.git'
     def branch_name = 'main'
-    def projectKey_name = 'test'
+    def projectKey_name = 'Reactjs-Bug'
     def channel_name = 'notification'
     def email_recipients = 'aayush.verma@mygurukulam.co'
     
@@ -14,19 +14,10 @@ node {
             userRemoteConfigs: [[url: git_url, credentialsId: 'git-cred']]
             ])
         }
-        stage('Install Dependencies'){
-            sh '''
-                sudo apt install unzip -y
-                wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-7.0.2.4839-linux-x64.zip
-                unzip sonar-scanner-cli-7.0.2.4839-linux-x64.zip
-                sudo rm -rf /opt/sonar-scanner
-                sudo mv sonar-scanner-7.0.2.4839-linux-x64 /opt/sonar-scanner
-                echo 'export PATH=$PATH:/opt/sonar-scanner/bin' >> ~/.bashrc
-                . ~/.bashrc
-            '''
-        }
+
         stage('Static Code Analysis'){
-            echo "Using SonarQube Project Key: ${projectKey_name}"
+             script {
+            def scannerHome = tool 'Sonarqubescanner'
             withSonarQubeEnv('sonar') {
                 withCredentials([string(credentialsId: 'sonarTocken', variable: 'SONARQUBE_TOKEN')]) {
                     sh """
@@ -37,6 +28,7 @@ node {
                     """
                 }
             }
+             }
         }
         stage('Notify Success') {
             slackSend(
@@ -55,7 +47,7 @@ node {
                     - **Build Number:** ${env.BUILD_NUMBER}
                     - **Build URL:** ${env.BUILD_URL}
 
-                    React Bug report published on SonarQube Server project name:- ${env.projectKey_name}
+                    React Bug report published on SonarQube Server project name:- ${projectKey_name}
                 
                     Best regards,  
                     Jenkins CI
