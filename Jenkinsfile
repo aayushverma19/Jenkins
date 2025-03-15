@@ -1,4 +1,4 @@
-@Library ('React-CI@SCRUM-217') _
+@Library ('React-CI@Aayush-SCRUM-217') _
 
 pipeline {
       agent any 
@@ -7,21 +7,21 @@ pipeline {
     }
 
     stages{
-      stage('clean-workspace') {
+      stage('Clean Workspace') {
         steps{
           script {
               cleanWorkspace()  
           }
         }
       }
-      stage('clone repo') {
+      stage('Clone Repo') {
         steps{
           script {
               gitClone('main' , 'https://github.com/snaatak-Zero-Downtime-Crew/frontend.git' , 'git-cred')
           }
         }
       }
-      stage('check dependency') {
+      stage('Check Dependency') {
         steps{
           script {
               reactDependency('dependency_report.txt')  
