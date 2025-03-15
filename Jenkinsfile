@@ -23,7 +23,7 @@ pipeline {
         }
         stage('run'){
             steps{
-                rurBuganalyis()
+                runBuganalyis()
             }
         }
     }
